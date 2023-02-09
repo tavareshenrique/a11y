@@ -1,3 +1,4 @@
+import { useState } from 'react';
 
 import Image from 'next/image';
 
@@ -7,6 +8,12 @@ import styles from '@/styles/home.module.scss';
 import Head from 'next/head';
 
 export default function Home() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  function handleModalOpen() {
+    setIsModalOpen(true);
+  }
+
   return (
     <>
       <Head>
@@ -53,11 +60,19 @@ export default function Home() {
         />
 
         <nav className={styles.nav} aria-label="Rodapé">
-          <a href="#termos-de-uso">
+          <button type='button' onClick={handleModalOpen}>
             Termos de Uso
-          </a>
+          </button>
         </nav>
       </footer>
+
+      {isModalOpen && (
+        <div className={styles.modal}>
+          <h2>Termos de Uso</h2>
+
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptas, quae, voluptate, quod voluptates quibusdam quia quos quidem natus quas doloribus. Quisquam, voluptas, quae, voluptate, quod voluptates quibusdam quia quos quidem natus quas doloribus.</p>
+        </div>
+      )}
     </>
   )
 }
