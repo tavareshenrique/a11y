@@ -4,10 +4,15 @@ import Image from 'next/image';
 import logoImg from '@/assets/logo.svg';
 
 import styles from '@/styles/home.module.scss';
+import Head from 'next/head';
 
 export default function Home() {
   return (
     <>
+      <Head>
+        <title>Lorem ipsum dolor sit amet | Rocketseat Blog</title>
+      </Head>
+
       <header className={styles.header}>
         <Image 
           src={logoImg}
@@ -27,9 +32,9 @@ export default function Home() {
       <main className={styles.content}>
         <article>
           <header>
-            <h2>Lorem ipsum dolor sit amet.</h2>
+            <h1>Lorem ipsum dolor sit amet.</h1>
 
-            <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit quidem tenetur ab sint tempora ipsam officiis blanditiis autem. Quod, ab.</h4>
+            <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit quidem tenetur ab sint tempora ipsam officiis blanditiis autem. Quod, ab.</h2>
           </header>
 
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, molestias, voluptatum, rerum assumenda accusamus eum totam natus repellat consequatur quia porro magnam est? Ullam molestiae nam numquam voluptatem temporibus nemo!</p>
