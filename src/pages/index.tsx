@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import Image from 'next/image';
 
@@ -9,10 +9,17 @@ import Head from 'next/head';
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const modalRef = useRef<HTMLDivElement>(null);
 
   function handleModalOpen() {
     setIsModalOpen(true);
   }
+
+  useEffect(() => {
+    if (isModalOpen) {
+      modalRef?.current?.focus();
+    }
+  }, [isModalOpen])
 
   return (
     <>
@@ -60,17 +67,25 @@ export default function Home() {
         />
 
         <nav className={styles.nav} aria-label="Rodapé">
-          <button type='button' onClick={handleModalOpen}>
+          <button type='button' onClick={handleModalOpen} aria-controls="useTerms-modal">
             Termos de Uso
           </button>
         </nav>
       </footer>
 
       {isModalOpen && (
-        <div className={styles.modal}>
-          <h2>Termos de Uso</h2>
+        <div 
+          id="useTerms-modal"
+          ref={modalRef}
+          className={styles.modal} 
+          role="dialog" 
+          aria-labelledby="useTerms-modalTitle"
+          aria-describedby="useTerms-modalDescription"
+          tabIndex={-1}
+        >
+          <h2 id="useTerms-modalTitle">Termos de Uso</h2>
 
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptas, quae, voluptate, quod voluptates quibusdam quia quos quidem natus quas doloribus. Quisquam, voluptas, quae, voluptate, quod voluptates quibusdam quia quos quidem natus quas doloribus.</p>
+          <p id="useTerms-modalDescription">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptas, quae, voluptate, quod voluptates quibusdam quia quos quidem natus quas doloribus. Quisquam, voluptas, quae, voluptate, quod voluptates quibusdam quia quos quidem natus quas doloribus.</p>
         </div>
       )}
     </>
