@@ -69,3 +69,20 @@
   border-radius: 5px;
   color: #202024;
 }
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.75);  
+  position: fixed;
+  inset: 0;
+}
+
+.closeModalButton {
+  width: 100%;
+  padding: 12px 20px;
+  margin-top: 16px;
+  background-color  : #8257e5;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: bold;
+}

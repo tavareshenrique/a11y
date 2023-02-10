@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
-
 import Image from 'next/image';
+import * as Dialog from '@radix-ui/react-dialog';
 
 import logoImg from '@/assets/logo.svg';
 
@@ -8,19 +7,6 @@ import styles from '@/styles/home.module.scss';
 import Head from 'next/head';
 
 export default function Home() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const modalRef = useRef<HTMLDivElement>(null);
-
-  function handleModalOpen() {
-    setIsModalOpen(true);
-  }
-
-  useEffect(() => {
-    if (isModalOpen) {
-      modalRef?.current?.focus();
-    }
-  }, [isModalOpen])
-
   return (
     <>
       <Head>
@@ -67,27 +53,31 @@ export default function Home() {
         />
 
         <nav className={styles.nav} aria-label="Rodapé">
-          <button type='button' onClick={handleModalOpen} aria-controls="useTerms-modal">
-            Termos de Uso
-          </button>
+          <Dialog.Root>
+            <Dialog.Trigger asChild>
+              <button type='button'>
+                Termos de Uso
+              </button>
+            </Dialog.Trigger>
+
+            <Dialog.Portal>
+              <Dialog.Overlay className={styles.overlay} />
+              <Dialog.Content className={styles.modal}>
+                <Dialog.Title>Termos de Uso</Dialog.Title>
+                <Dialog.Description>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptas, quae, voluptate, quod voluptates quibusdam quia quos quidem natus quas doloribus. Quisquam, voluptas, quae, voluptate, quod voluptates quibusdam quia quos quidem natus quas doloribus.
+                </Dialog.Description>
+
+                <Dialog.Close asChild>
+                  <button type="button" className={styles.closeModalButton}>
+                    Fechar
+                  </button>
+                </Dialog.Close>
+              </Dialog.Content>
+            </Dialog.Portal>
+          </Dialog.Root>
         </nav>
       </footer>
-
-      {isModalOpen && (
-        <div 
-          id="useTerms-modal"
-          ref={modalRef}
-          className={styles.modal} 
-          role="dialog" 
-          aria-labelledby="useTerms-modalTitle"
-          aria-describedby="useTerms-modalDescription"
-          tabIndex={-1}
-        >
-          <h2 id="useTerms-modalTitle">Termos de Uso</h2>
-
-          <p id="useTerms-modalDescription">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptas, quae, voluptate, quod voluptates quibusdam quia quos quidem natus quas doloribus. Quisquam, voluptas, quae, voluptate, quod voluptates quibusdam quia quos quidem natus quas doloribus.</p>
-        </div>
-      )}
     </>
   )
 }
